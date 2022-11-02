@@ -46,13 +46,15 @@ public class TouchManager : MonoBehaviour
                 {
                     if(lastPosition.x>firstPosition.x)
                     {
-                        Debug.Log("SWIPE RIGHT");
-                        GoXAxis(1);
+                        //Debug.Log("SWIPE RIGHT");
+                        JumpXAxis(+1.2f);
+                        //GoXAxis(1.2f);
                     }
                     else
                     {
-                        Debug.Log("SWIPE LEFT");
-                        GoXAxis(-1);
+                        //Debug.Log("SWIPE LEFT");
+                        JumpXAxis(-1.2f);
+                        //GoXAxis(-1.2f);
                     }
                 }
 
@@ -60,13 +62,15 @@ public class TouchManager : MonoBehaviour
                 {
                     if(lastPosition.y>firstPosition.y)
                     {
-                        Debug.Log("SWIPE UP");
-                        GoZAxis(1);
+                        //Debug.Log("SWIPE UP");
+                        JumpZAxis(+1.2f);
+                        //GoZAxis(1.2f);
                     }
                     else
                     {
-                        Debug.Log("SWIPE DOWN");
-                        GoZAxis(-1);
+                        //Debug.Log("SWIPE DOWN");
+                        JumpZAxis(-1.2f);
+                        //GoZAxis(-1.2f);
                     }
                 }
             }
@@ -83,6 +87,18 @@ public class TouchManager : MonoBehaviour
     {
         var currentPosUp=transform.position.z;
         transform.DOMoveZ(currentPosUp+direction,0.25f);
+    }
+
+    private void JumpXAxis(float direction)
+    {
+        var currentPos=transform.position;
+        transform.DOJump(new Vector3(currentPos.x+direction,currentPos.y,currentPos.z),1,1,0.25f);
+    }
+
+    private void JumpZAxis(float direction)
+    {
+        var currentPos=transform.position;
+        transform.DOJump(new Vector3(currentPos.x,currentPos.y,currentPos.z + direction),1,1,0.25f);
     }
 
 }
