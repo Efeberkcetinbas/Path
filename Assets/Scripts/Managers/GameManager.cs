@@ -12,6 +12,10 @@ public class GameManager : MonoBehaviour
     
 
     public Vector3 PlayerStartPosition;
+    public Vector3 FinishPosition;
+
+    public float ProgressValue;
+    public float finishLineZ;
 
 
     private void Awake()
@@ -25,12 +29,38 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
-    public void UpdateStartPos()
+
+
+    private void UpdateStartPos()
     {
         PlayerStartPosition=FindObjectOfType<StartPosControl>().startPos;
         Player.transform.position=PlayerStartPosition;
     }
+
+    private void UpdateFinishPos()
+    {
+        FinishPosition=FindObjectOfType<FinishLinePos>().FLinePosition;
+        finishLineZ=FindObjectOfType<FinishLinePos>().finishZ;
+    }
+
+    public void UploadAllUpdates()
+    {
+        UpdateStartPos();
+        UpdateFinishPos();
+    }
+
+    public void CalculateForwardToFinish()
+    {
+        ProgressValue+=1/(float)finishLineZ;
+        UIManager.Instance.UpdateProgressBar(ProgressValue);
+    }
+
+    public void CalculateBackwardToFinish()
+    {
+        ProgressValue-=1/(float)finishLineZ;
+        UIManager.Instance.UpdateProgressBar(ProgressValue);
+    }
+
     public void ResetTheLevel()
     {
        //

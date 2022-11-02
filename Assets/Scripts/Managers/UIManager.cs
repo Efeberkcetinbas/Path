@@ -11,7 +11,14 @@ public class UIManager : MonoBehaviour
 
     public static UIManager Instance;
 
+    [Header("Texts")]
     public TextMeshProUGUI LevelText;
+    public TextMeshProUGUI ScoreText;
+    public TextMeshProUGUI ToLevelText;
+
+    [Header("Images")]
+    public Image progressImage;
+
     public RectTransform fader;
 
 
@@ -31,6 +38,23 @@ public class UIManager : MonoBehaviour
     public void UpgradeLevelText()
     {
         LevelText.text = "Level " + (PlayerPrefs.GetInt("RealLevel") + 1).ToString();
+    }
+
+    public void UpdateLevelToText()
+    {
+        LevelText.text = (PlayerPrefs.GetInt("RealLevel") + 1).ToString();
+        ToLevelText.text = (PlayerPrefs.GetInt("RealLevel") + 2).ToString();
+    }
+
+    public void UpgradeScoreText()
+    {
+        //DOTween.To(() => score, x => score = x, score+increaseScore, 5f);
+        ScoreText.text=ScoreManager.Instance.score.ToString();
+    }
+
+    public void UpdateProgressBar(float value)
+    {
+        progressImage.DOFillAmount(value,0.5f);
     }
 
     public void StartFader()

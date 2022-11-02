@@ -11,9 +11,13 @@ public class TouchManager : MonoBehaviour
 
     private float dragDistance;
 
+
+    ScoreManager scoreManager;
+
     void Start()
     {
         dragDistance=Screen.height*15/100;
+        scoreManager=ScoreManager.Instance;
     }
 
     void Update()
@@ -46,15 +50,11 @@ public class TouchManager : MonoBehaviour
                 {
                     if(lastPosition.x>firstPosition.x)
                     {
-                        //Debug.Log("SWIPE RIGHT");
-                        JumpXAxis(+1.2f);
-                        //GoXAxis(1.2f);
+                        JumpXAxis(+1);
                     }
                     else
                     {
-                        //Debug.Log("SWIPE LEFT");
-                        JumpXAxis(-1.2f);
-                        //GoXAxis(-1.2f);
+                        JumpXAxis(-1);
                     }
                 }
 
@@ -62,21 +62,20 @@ public class TouchManager : MonoBehaviour
                 {
                     if(lastPosition.y>firstPosition.y)
                     {
-                        //Debug.Log("SWIPE UP");
-                        JumpZAxis(+1.2f);
-                        //GoZAxis(1.2f);
+                        JumpZAxis(+1);
+                        GameManager.Instance.CalculateForwardToFinish();
                     }
                     else
                     {
-                        //Debug.Log("SWIPE DOWN");
-                        JumpZAxis(-1.2f);
-                        //GoZAxis(-1.2f);
+                        JumpZAxis(-1);
+                        GameManager.Instance.CalculateBackwardToFinish();
                     }
                 }
             }
         }
     }
 
+    #region Move
     private void GoXAxis(float direction)
     {
         var currentPosLeft=transform.position.x;
@@ -89,16 +88,23 @@ public class TouchManager : MonoBehaviour
         transform.DOMoveZ(currentPosUp+direction,0.25f);
     }
 
+    #endregion
+
+    #region Jump
     private void JumpXAxis(float direction)
     {
         var currentPos=transform.position;
         transform.DOJump(new Vector3(currentPos.x+direction,currentPos.y,currentPos.z),1,1,0.25f);
+        scoreManager.UpdateScore(50);
     }
 
     private void JumpZAxis(float direction)
     {
         var currentPos=transform.position;
-        transform.DOJump(new Vector3(currentPos.x,currentPos.y,currentPos.z + direction),1,1,0.25f);
+        transform.DOJump(new Vector3(currentPos.x,currentPos.y,currentPos.z + direction),1,1,0.25f).OnComplete(()=>{
+            //GameManager.Instance.CalculateStartToFinish();
+        });
+        scoreManager.UpdateScore(50);
     }
-
+    #endregion
 }

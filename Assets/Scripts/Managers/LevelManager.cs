@@ -40,13 +40,20 @@ public class LevelManager : MonoBehaviour
         PlayerPrefs.SetInt("LevelNumber", levelIndex);
        
 
-        UIManager.Instance.UpgradeLevelText();
+        UIManager.Instance.UpdateLevelToText();
 
         for (int i = 0; i < levels.Count; i++)
         {
             levels[i].SetActive(false);
         }
         levels[levelIndex].SetActive(true);
+
+
+        //
+        ScoreManager.Instance.UpdateScore(PlayerPrefs.GetInt("Score"));
+        UIManager.Instance.UpgradeScoreText();
+        GameManager.Instance.UploadAllUpdates();
+        
 
         
     }
