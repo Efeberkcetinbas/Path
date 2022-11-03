@@ -53,6 +53,7 @@ public class LevelManager : MonoBehaviour
         ScoreManager.Instance.UpdateScore(PlayerPrefs.GetInt("Score"));
         UIManager.Instance.UpgradeScoreText();
         GameManager.Instance.UploadAllUpdates();
+        GameManager.Instance.canPlayerJump=true;
         
 
         

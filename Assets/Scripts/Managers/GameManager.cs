@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public float ProgressValue;
     public float finishLineZ;
 
+    public bool canPlayerJump;
+
 
     private void Awake()
     {
