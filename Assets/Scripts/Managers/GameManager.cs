@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public GameObject Player;
-    
 
     public Vector3 PlayerStartPosition;
     public Vector3 FinishPosition;
@@ -67,4 +66,6 @@ public class GameManager : MonoBehaviour
     {
        //
     }
+
+    
 }

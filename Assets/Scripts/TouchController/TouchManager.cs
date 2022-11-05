@@ -96,7 +96,7 @@ public class TouchManager : MonoBehaviour
 
     private IEnumerator JumpToFalse()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(.75f);
         gameManager.canPlayerJump=true;
     }
 

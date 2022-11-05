@@ -20,4 +20,9 @@ public class GridAvailable : Obstacleable
             //Game Over 
         }
     }
+
+    internal override void InteractionExit(Player player)
+    {
+        //
+    }
 }

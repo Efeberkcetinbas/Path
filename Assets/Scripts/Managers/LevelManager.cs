@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour
 
     public List<GameObject> levels;
 
+
     
 
 
@@ -55,7 +56,6 @@ public class LevelManager : MonoBehaviour
         GameManager.Instance.UploadAllUpdates();
         GameManager.Instance.canPlayerJump=true;
         
-
         
     }
 
