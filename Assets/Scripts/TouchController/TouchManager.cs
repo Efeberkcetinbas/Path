@@ -17,6 +17,7 @@ public class TouchManager : MonoBehaviour
 
     [SerializeField] private Animator animator;
 
+
     void Start()
     {
         dragDistance=Screen.height*15/100;
@@ -96,8 +97,10 @@ public class TouchManager : MonoBehaviour
 
     private IEnumerator JumpToFalse()
     {
-        yield return new WaitForSeconds(.75f);
-        gameManager.canPlayerJump=true;
+        //.75,5f
+        yield return new WaitForSeconds(.2f);
+        if(!gameManager.isGameEnd)
+            gameManager.canPlayerJump=true;
     }
 
     #region Move

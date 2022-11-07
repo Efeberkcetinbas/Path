@@ -8,15 +8,22 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    [Header("About Player")]
     public GameObject Player;
-
     public Vector3 PlayerStartPosition;
     public Vector3 FinishPosition;
+    public bool canPlayerJump;
+
 
     public float ProgressValue;
     public float finishLineZ;
 
-    public bool canPlayerJump;
+    [Header("Game Ending")]
+    public GameObject successPanel;
+    public GameObject failPanel;
+    public bool isGameEnd=false;
+
+
 
 
     private void Awake()
@@ -64,8 +71,22 @@ public class GameManager : MonoBehaviour
 
     public void ResetTheLevel()
     {
+        Player.transform.position=PlayerStartPosition;
+        Player.transform.rotation=Quaternion.identity;
+        ProgressValue=0;
+        UIManager.Instance.UpdateProgressBar(0);
+        successPanel.SetActive(false);
+        failPanel.SetActive(false);
        //
     }
+
+    public void Open(GameObject gameObjects)
+    {
+        gameObjects.SetActive(true);
+    }
+
+    
+
 
     
 }

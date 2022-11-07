@@ -11,7 +11,7 @@ public class CameraManager : MonoBehaviour
     public Camera mainCamera;
 
     public CinemachineVirtualCamera cm;
-    public CinemachineVirtualCamera cm2;
+    //public CinemachineVirtualCamera cm2;
 
 
     public Transform cmCamera;
@@ -40,19 +40,19 @@ public class CameraManager : MonoBehaviour
     public void ChangeFieldOfView(float fieldOfView, float duration = 1)
     {
         //DOTween.To(() => cm.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset, x => cm.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = x, offset, duration);
-        //DOTween.To(() => cm.m_Lens.FieldOfView, x => cm.m_Lens.FieldOfView = x, fieldOfView, duration);
+        DOTween.To(() => cm.m_Lens.FieldOfView, x => cm.m_Lens.FieldOfView = x, fieldOfView, duration);
     }
    
     public void ResetCamera()
     {
-        cm2.m_Priority = 5;
+        //cm2.m_Priority = 5;
     }
 
     public void ChangeCameras(float fieldOfView, float duration,GameObject gameObject)
     {
         //gameObject.transform.rotation=Quaternion.Euler(0,180,0);
-        cm2.m_Priority=15;
-        DOTween.To(() => cm2.m_Lens.FieldOfView, x => cm2.m_Lens.FieldOfView = x, fieldOfView, duration);
+        /*cm2.m_Priority=15;
+        DOTween.To(() => cm2.m_Lens.FieldOfView, x => cm2.m_Lens.FieldOfView = x, fieldOfView, duration);*/
         //cmCamera.DOLocalMove(new Vector3(xPos, yPos, zPos), duration);
         //cmCamera.DOLocalRotate(new Vector3(xRot, yRot, 0), duration);
     }

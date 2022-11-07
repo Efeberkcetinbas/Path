@@ -8,11 +8,16 @@ public class GridAvailable : Obstacleable
     [SerializeField] private bool isAvailable;
 
     [SerializeField] private MeshRenderer mr;
+
+    [SerializeField] private float yAxis,oldYAxis;
+
+    public Material currentMesh;
     internal override void DoAction(Player player)
     {
         if(isAvailable)
         {
             mr.material.DOColor(Color.green,0.5f);
+            StartCoroutine(StartShake());
         }
         else
         {
@@ -21,8 +26,16 @@ public class GridAvailable : Obstacleable
         }
     }
 
+    private IEnumerator StartShake()
+    {
+        yield return new WaitForSeconds(0.3f);
+        CameraManager.Instance.ShakeIt();
+    }
+
+
     internal override void InteractionExit(Player player)
     {
+        transform.DOLocalMoveY(yAxis,0.25f).OnComplete(()=>transform.DOLocalMoveY(oldYAxis,0.25f));
         //
     }
 }

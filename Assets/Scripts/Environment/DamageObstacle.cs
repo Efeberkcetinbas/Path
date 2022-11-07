@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class DamageObstacle : Obstacleable
 {
+
     internal override void DoAction(Player player)
     {
-        //
+        GameManager.Instance.Open(GameManager.Instance.failPanel);
     }
 }
