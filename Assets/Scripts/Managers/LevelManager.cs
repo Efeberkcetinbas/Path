@@ -49,15 +49,15 @@ public class LevelManager : MonoBehaviour
         }
         levels[levelIndex].SetActive(true);
 
-
-        //
-        ScoreManager.Instance.UpdateScore(PlayerPrefs.GetInt("Score"));
+        ScoreManager.Instance.score=PlayerPrefs.GetInt("Score");
         UIManager.Instance.UpgradeScoreText();
         GameManager.Instance.UploadAllUpdates();
         StartCoroutine(CanJump());
+        StartCoroutine(StartMapping());
         GameManager.Instance.ResetTheLevel();
         CameraManager.Instance.ChangeFieldOfView(60,0.2f);
         GameManager.Instance.isGameEnd=false;
+        
         
         
     }
@@ -67,7 +67,6 @@ public class LevelManager : MonoBehaviour
         PlayerPrefs.SetInt("LevelNumber", levelIndex + 1);
         PlayerPrefs.SetInt("RealLevel", PlayerPrefs.GetInt("RealLevel", 0) + 1);
         LoadLevel();
-        UIManager.Instance.StartFader();
     }
 
     public void RestartLevel()
@@ -79,6 +78,12 @@ public class LevelManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         GameManager.Instance.canPlayerJump=true;
+    }
+
+    private IEnumerator StartMapping()
+    {
+        yield return new WaitForSeconds(1);
+        CameraManager.Instance.MappingCamera(GameManager.Instance.finishLineZ,3);
     }
 
 

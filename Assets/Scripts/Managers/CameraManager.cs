@@ -11,7 +11,7 @@ public class CameraManager : MonoBehaviour
     public Camera mainCamera;
 
     public CinemachineVirtualCamera cm;
-    //public CinemachineVirtualCamera cm2;
+    public CinemachineVirtualCamera cm2;
 
 
     public Transform cmCamera;
@@ -42,10 +42,18 @@ public class CameraManager : MonoBehaviour
         //DOTween.To(() => cm.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset, x => cm.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = x, offset, duration);
         DOTween.To(() => cm.m_Lens.FieldOfView, x => cm.m_Lens.FieldOfView = x, fieldOfView, duration);
     }
+
+    public void MappingCamera(float finishZ,float duration)
+    {
+        ResetCamera();
+        cm2.transform.DOLocalMoveZ(finishZ,duration).OnComplete(()=>{
+            cm2.m_Priority=1;
+        });
+    }
    
     public void ResetCamera()
     {
-        //cm2.m_Priority = 5;
+        cm2.m_Priority = 11;
     }
 
     public void ChangeCameras(float fieldOfView, float duration,GameObject gameObject)

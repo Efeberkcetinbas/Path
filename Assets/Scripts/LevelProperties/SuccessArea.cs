@@ -6,8 +6,7 @@ public class SuccessArea : Obstacleable
 {
     internal override void DoAction(Player player)
     {
-        SlowMotionManager.Instance.DoSlowmotion();
-        CameraManager.Instance.ChangeFieldOfView(30,0.5f);
+        CameraManager.Instance.ChangeFieldOfView(30,0.75f);
         GameManager.Instance.isGameEnd=true;
         StartCoroutine(OpenPanel());
     }

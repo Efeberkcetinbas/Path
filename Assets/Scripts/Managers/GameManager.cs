@@ -77,13 +77,22 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.UpdateProgressBar(0);
         successPanel.SetActive(false);
         failPanel.SetActive(false);
+        StartCoroutine(DeactiveGameEnd());
        //
+    }
+
+    private IEnumerator DeactiveGameEnd()
+    {
+        yield return new WaitForSeconds(.5f);
+        isGameEnd=false;
     }
 
     public void Open(GameObject gameObjects)
     {
         gameObjects.SetActive(true);
     }
+
+   
 
     
 

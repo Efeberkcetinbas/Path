@@ -8,5 +8,6 @@ public class DamageObstacle : Obstacleable
     internal override void DoAction(Player player)
     {
         GameManager.Instance.Open(GameManager.Instance.failPanel);
+        GameManager.Instance.isGameEnd=true;
     }
 }

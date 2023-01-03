@@ -19,15 +19,16 @@ public abstract class Obstacleable : MonoBehaviour
             StartInteractWithPlayer(other.GetComponent<Player>());
         }
     }
-    //Buz bolgesi icin.
-    void OnTriggerStay(Collider other)
+    // !!!!!!!!!!!!!!
+    //Kaldigi sure boyunca burasi da aktif oluyor
+    /*void OnTriggerStay(Collider other)
     {
         if (!canInteract) return;
         if (other.tag == interactionTag)
         {
             InteractWithPlayer(other.GetComponent<Player>());
         }
-    }
+    }*/
     void OnTriggerExit(Collider other)
     {
         if (other.tag == interactionTag)

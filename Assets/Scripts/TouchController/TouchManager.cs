@@ -18,6 +18,7 @@ public class TouchManager : MonoBehaviour
     [SerializeField] private Animator animator;
 
 
+
     void Start()
     {
         dragDistance=Screen.height*15/100;
@@ -27,7 +28,7 @@ public class TouchManager : MonoBehaviour
 
     void Update()
     {
-        if(gameManager.canPlayerJump)
+        if(gameManager.canPlayerJump && !gameManager.isGameEnd)
             CheckMove();
 
     }
@@ -126,7 +127,6 @@ public class TouchManager : MonoBehaviour
             animator.SetBool("Jump",false);
             StartCoroutine(JumpToFalse());
         });
-        scoreManager.UpdateScore(50);
     }
 
     private void JumpZAxis(float direction)
@@ -137,7 +137,6 @@ public class TouchManager : MonoBehaviour
             StartCoroutine(JumpToFalse());
             //GameManager.Instance.CalculateStartToFinish();
         });
-        scoreManager.UpdateScore(50);
     }
     #endregion
 
@@ -148,4 +147,6 @@ public class TouchManager : MonoBehaviour
     }
 
     #endregion
+
+   
 }

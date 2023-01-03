@@ -11,7 +11,8 @@ public class GridAvailable : Obstacleable
 
     [SerializeField] private float yAxis,oldYAxis;
 
-    public Material currentMesh;
+    [SerializeField] private ParticleSystem JumpEffect;
+
     internal override void DoAction(Player player)
     {
         if(isAvailable)
@@ -30,6 +31,8 @@ public class GridAvailable : Obstacleable
     {
         yield return new WaitForSeconds(0.3f);
         CameraManager.Instance.ShakeIt();
+        JumpEffect.Play();
+
     }
 
 

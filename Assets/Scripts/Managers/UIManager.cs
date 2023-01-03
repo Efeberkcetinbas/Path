@@ -56,13 +56,5 @@ public class UIManager : MonoBehaviour
     {
         progressImage.DOFillAmount(value,0.5f);
     }
-
-    public void StartFader()
-    {
-        fader.gameObject.SetActive(true);
-
-        fader.DOScale(new Vector3(3,3,3),1).OnComplete(()=>{
-            fader.DOScale(Vector3.zero,1f).OnComplete(()=>fader.gameObject.SetActive(false));
-        });
-    }
+    
 }
