@@ -61,22 +61,23 @@ public class TouchManager : MonoBehaviour
                     if(lastPosition.x>firstPosition.x)
                     {
                         gameManager.canPlayerJump=false;
-                        RotateYAxis(90);
+                        //RotateYAxis(90);
                         //Rotate
-                        JumpXAxis(+1);
+                        JumpXAxis(+1,-360);
                         //GoXAxis(+1);
-                        animator.SetBool("Jump",true);
+                        //animator.SetBool("Jump",true);
                         soundManager.Play("Jumping");
                         gameManager.CalculateProgressPosition();
                         
                     }
                     else
                     {
+                        
                         gameManager.canPlayerJump=false;
-                        JumpXAxis(-1);
+                        JumpXAxis(-1,360);
                         //GoXAxis(-1);
-                        RotateYAxis(-90);
-                        animator.SetBool("Jump",true);
+                        //RotateYAxis(-90);
+                        //animator.SetBool("Jump",true);
                         soundManager.Play("Jumping");
                         gameManager.CalculateProgressPosition();
                     }
@@ -87,20 +88,20 @@ public class TouchManager : MonoBehaviour
                     if(lastPosition.y>firstPosition.y)
                     {
                         gameManager.canPlayerJump=false;
-                        JumpZAxis(+1);
+                        JumpZAxis(+1,360);
                         //GoZAxis(+1);
-                        RotateYAxis(0);
-                        animator.SetBool("Jump",true);
+                        //RotateYAxis(0);
+                        //animator.SetBool("Jump",true);
                         soundManager.Play("Jumping");
                         gameManager.CalculateProgressPosition();
                     }
                     else
                     {
                         gameManager.canPlayerJump=false;
-                        JumpZAxis(-1);
+                        JumpZAxis(-1,-360);
                         //GoZAxis(-1);
-                        RotateYAxis(180);
-                        animator.SetBool("Jump",true);
+                        //RotateYAxis(180);
+                        //animator.SetBool("Jump",true);
                         soundManager.Play("Jumping");
                         gameManager.CalculateProgressPosition();
 
@@ -139,20 +140,22 @@ public class TouchManager : MonoBehaviour
     #endregion
 
     #region Jump
-    private void JumpXAxis(float direction)
+    private void JumpXAxis(float direction,float rot)
     {
         var currentPos=transform.position;
+        transform.DORotate(new Vector3(0,0,rot),1f, RotateMode.FastBeyond360);
         transform.DOJump(new Vector3(currentPos.x+direction,currentPos.y,currentPos.z),1,1,1f).OnComplete(()=>{
-            animator.SetBool("Jump",false);
+            //animator.SetBool("Jump",false);
             StartCoroutine(JumpToFalse());
         });
     }
 
-    private void JumpZAxis(float direction)
+    private void JumpZAxis(float direction,float rot)
     {
         var currentPos=transform.position;
+        transform.DORotate(new Vector3(rot,0,0),1f, RotateMode.FastBeyond360);
         transform.DOJump(new Vector3(currentPos.x,currentPos.y,currentPos.z + direction),1,1,1).OnComplete(()=>{
-            animator.SetBool("Jump",false);
+            //animator.SetBool("Jump",false);
             StartCoroutine(JumpToFalse());
             //GameManager.Instance.CalculateStartToFinish();
         });

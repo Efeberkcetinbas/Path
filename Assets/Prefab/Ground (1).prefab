@@ -114,7 +114,6 @@ MonoBehaviour:
   yAxis: -0.5
   oldYAxis: 0
   JumpEffect: {fileID: 4191113813431786089}
-  currentMesh: {fileID: 2100000, guid: 7a9775e19466ef54bb9c03bb564ea6c1, type: 2}
 --- !u!1001 &957645123469750805
 PrefabInstance:
   m_ObjectHideFlags: 0
