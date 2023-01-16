@@ -22,7 +22,10 @@ public class GridAvailable : Obstacleable
         }
         else
         {
-            mr.material.DOColor(Color.red,0.5f);
+            mr.material.DOColor(Color.red,0.5f).OnComplete(()=>{
+                GameManager.Instance.Open(GameManager.Instance.failPanel);
+                GameManager.Instance.isGameEnd=true;
+            });
             //Game Over 
         }
     }

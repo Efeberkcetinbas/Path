@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public float ProgressValue;
     public float finishLineZ;
 
+    
+
     [Header("Game Ending")]
     public GameObject successPanel;
     public GameObject failPanel;
@@ -50,6 +52,8 @@ public class GameManager : MonoBehaviour
         FinishPosition=FindObjectOfType<FinishLinePos>().FLinePosition;
         finishLineZ=FindObjectOfType<FinishLinePos>().finishZ;
     }
+
+    
 
     public void UploadAllUpdates()
     {

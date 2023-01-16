@@ -15,11 +15,16 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI LevelText;
     public TextMeshProUGUI ScoreText;
     public TextMeshProUGUI ToLevelText;
+    public TextMeshProUGUI InformationText;
 
     [Header("Images")]
     public Image progressImage;
 
     public RectTransform fader;
+
+    
+
+    
 
 
     void Awake()
@@ -48,13 +53,23 @@ public class UIManager : MonoBehaviour
 
     public void UpgradeScoreText()
     {
-        //DOTween.To(() => score, x => score = x, score+increaseScore, 5f);
-        ScoreText.text=ScoreManager.Instance.score.ToString();
+        DOVirtual.Float(0f, ScoreManager.Instance.score, .5f,OnValueUpdate);
+        //ScoreText.text=ScoreManager.Instance.score.ToString();
+    }
+
+    private void OnValueUpdate(float v)
+    {
+        ScoreText.text = Mathf.Floor(v).ToString();
     }
 
     public void UpdateProgressBar(float value)
     {
         progressImage.DOFillAmount(value,0.5f);
+    }
+
+    public void UpdateInformation()
+    {
+        InformationText.text=FindObjectOfType<LevelInformation>().LevelInformationText.ToString();
     }
     
 }

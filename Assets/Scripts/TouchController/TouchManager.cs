@@ -14,6 +14,7 @@ public class TouchManager : MonoBehaviour
 
     ScoreManager scoreManager;
     GameManager gameManager;
+    SoundManager soundManager;
 
     [SerializeField] private Animator animator;
 
@@ -24,6 +25,7 @@ public class TouchManager : MonoBehaviour
         dragDistance=Screen.height*15/100;
         scoreManager=ScoreManager.Instance;
         gameManager=GameManager.Instance;
+        soundManager=SoundManager.Instance;
     }
 
     void Update()
@@ -62,14 +64,19 @@ public class TouchManager : MonoBehaviour
                         RotateYAxis(90);
                         //Rotate
                         JumpXAxis(+1);
+                        //GoXAxis(+1);
                         animator.SetBool("Jump",true);
+                        soundManager.Play("Jumping");
+                        
                     }
                     else
                     {
                         gameManager.canPlayerJump=false;
                         JumpXAxis(-1);
+                        //GoXAxis(-1);
                         RotateYAxis(-90);
                         animator.SetBool("Jump",true);
+                        soundManager.Play("Jumping");
                     }
                 }
 
@@ -79,17 +86,21 @@ public class TouchManager : MonoBehaviour
                     {
                         gameManager.canPlayerJump=false;
                         JumpZAxis(+1);
+                        //GoZAxis(+1);
                         RotateYAxis(0);
                         animator.SetBool("Jump",true);
-                        GameManager.Instance.CalculateForwardToFinish();
+                        soundManager.Play("Jumping");
+                        gameManager.CalculateForwardToFinish();
                     }
                     else
                     {
                         gameManager.canPlayerJump=false;
                         JumpZAxis(-1);
+                        //GoZAxis(-1);
                         RotateYAxis(180);
                         animator.SetBool("Jump",true);
-                        GameManager.Instance.CalculateBackwardToFinish();
+                        soundManager.Play("Jumping");
+                        gameManager.CalculateBackwardToFinish();
                     }
                 }
             }
@@ -108,13 +119,17 @@ public class TouchManager : MonoBehaviour
     private void GoXAxis(float direction)
     {
         var currentPosLeft=transform.position.x;
-        transform.DOMoveX(currentPosLeft+direction,0.25f);
+        transform.DOMoveX(currentPosLeft+direction,0.25f).OnComplete(()=>{
+            StartCoroutine(JumpToFalse());
+        });
     }
 
     private void GoZAxis(float direction)
     {
         var currentPosUp=transform.position.z;
-        transform.DOMoveZ(currentPosUp+direction,0.25f);
+        transform.DOMoveZ(currentPosUp+direction,0.25f).OnComplete(()=>{
+            StartCoroutine(JumpToFalse());
+        });
     }
 
     #endregion

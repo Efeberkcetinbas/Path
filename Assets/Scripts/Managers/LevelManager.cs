@@ -47,16 +47,16 @@ public class LevelManager : MonoBehaviour
         {
             levels[i].SetActive(false);
         }
-        levels[levelIndex].SetActive(true);
+        levels[5].SetActive(true);
 
         ScoreManager.Instance.score=PlayerPrefs.GetInt("Score");
         UIManager.Instance.UpgradeScoreText();
         GameManager.Instance.UploadAllUpdates();
         StartCoroutine(CanJump());
-        StartCoroutine(StartMapping());
         GameManager.Instance.ResetTheLevel();
         CameraManager.Instance.ChangeFieldOfView(60,0.2f);
         GameManager.Instance.isGameEnd=false;
+        UIManager.Instance.UpdateInformation();
         
         
         
@@ -80,11 +80,7 @@ public class LevelManager : MonoBehaviour
         GameManager.Instance.canPlayerJump=true;
     }
 
-    private IEnumerator StartMapping()
-    {
-        yield return new WaitForSeconds(1);
-        CameraManager.Instance.MappingCamera(GameManager.Instance.finishLineZ,3);
-    }
+    
 
 
     
