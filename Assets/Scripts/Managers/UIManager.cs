@@ -12,10 +12,11 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     [Header("Texts")]
-    public TextMeshProUGUI LevelText;
+    public TextMeshProUGUI FromLevelText;
     public TextMeshProUGUI ScoreText;
     public TextMeshProUGUI ToLevelText;
     public TextMeshProUGUI InformationText;
+    public TextMeshProUGUI LevelText;
 
     [Header("Images")]
     public Image progressImage;
@@ -47,7 +48,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateLevelToText()
     {
-        LevelText.text = (PlayerPrefs.GetInt("RealLevel") + 1).ToString();
+        FromLevelText.text = (PlayerPrefs.GetInt("RealLevel") + 1).ToString();
         ToLevelText.text = (PlayerPrefs.GetInt("RealLevel") + 2).ToString();
     }
 

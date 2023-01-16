@@ -21,6 +21,7 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    //DOVirtual.Float(0f, ScoreManagement.instance.score, duration, OnValueUpdate);
 
     public void UpdateScore(int increaseScore)
     {

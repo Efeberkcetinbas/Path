@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FinishLinePos : MonoBehaviour
 {
-    public Vector3 FLinePosition;
 
     public float finishZ;
+    public float finishX;
 }

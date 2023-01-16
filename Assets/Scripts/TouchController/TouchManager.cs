@@ -67,6 +67,7 @@ public class TouchManager : MonoBehaviour
                         //GoXAxis(+1);
                         animator.SetBool("Jump",true);
                         soundManager.Play("Jumping");
+                        gameManager.CalculateProgressPosition();
                         
                     }
                     else
@@ -77,6 +78,7 @@ public class TouchManager : MonoBehaviour
                         RotateYAxis(-90);
                         animator.SetBool("Jump",true);
                         soundManager.Play("Jumping");
+                        gameManager.CalculateProgressPosition();
                     }
                 }
 
@@ -90,7 +92,7 @@ public class TouchManager : MonoBehaviour
                         RotateYAxis(0);
                         animator.SetBool("Jump",true);
                         soundManager.Play("Jumping");
-                        gameManager.CalculateForwardToFinish();
+                        gameManager.CalculateProgressPosition();
                     }
                     else
                     {
@@ -100,9 +102,11 @@ public class TouchManager : MonoBehaviour
                         RotateYAxis(180);
                         animator.SetBool("Jump",true);
                         soundManager.Play("Jumping");
-                        gameManager.CalculateBackwardToFinish();
+                        gameManager.CalculateProgressPosition();
+
                     }
                 }
+
             }
         }
     }

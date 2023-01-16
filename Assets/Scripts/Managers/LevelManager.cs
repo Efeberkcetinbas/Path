@@ -41,20 +41,21 @@ public class LevelManager : MonoBehaviour
         PlayerPrefs.SetInt("LevelNumber", levelIndex);
        
 
-        UIManager.Instance.UpdateLevelToText();
+        //UIManager.Instance.UpdateLevelToText();
+        UIManager.Instance.UpgradeLevelText();
 
         for (int i = 0; i < levels.Count; i++)
         {
             levels[i].SetActive(false);
         }
-        levels[5].SetActive(true);
+        levels[levelIndex].SetActive(true);
 
         ScoreManager.Instance.score=PlayerPrefs.GetInt("Score");
         UIManager.Instance.UpgradeScoreText();
         GameManager.Instance.UploadAllUpdates();
         StartCoroutine(CanJump());
         GameManager.Instance.ResetTheLevel();
-        CameraManager.Instance.ChangeFieldOfView(60,0.2f);
+        CameraManager.Instance.ChangeFieldOfView(50,0.2f);
         GameManager.Instance.isGameEnd=false;
         UIManager.Instance.UpdateInformation();
         

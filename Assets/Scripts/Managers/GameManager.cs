@@ -11,12 +11,12 @@ public class GameManager : MonoBehaviour
     [Header("About Player")]
     public GameObject Player;
     public Vector3 PlayerStartPosition;
-    public Vector3 FinishPosition;
     public bool canPlayerJump;
 
 
     public float ProgressValue;
     public float finishLineZ;
+    public float finishLineX;
 
     
 
@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
 
     private void UpdateFinishPos()
     {
-        FinishPosition=FindObjectOfType<FinishLinePos>().FLinePosition;
+        finishLineX=FindObjectOfType<FinishLinePos>().finishX;
         finishLineZ=FindObjectOfType<FinishLinePos>().finishZ;
     }
 
@@ -61,17 +61,22 @@ public class GameManager : MonoBehaviour
         UpdateFinishPos();
     }
 
-    public void CalculateForwardToFinish()
+    public void CalculateProgressPosition()
     {
-        ProgressValue+=1/(float)finishLineZ;
+        float distanceX=Mathf.Abs(finishLineX-Player.transform.position.x);
+        float distanceZ=Mathf.Abs(finishLineZ-Player.transform.position.z);
+
+        float PlayerToFinish=distanceX+distanceZ;
+
+
+        ProgressValue=1/PlayerToFinish;
+        Debug.Log(ProgressValue);
         UIManager.Instance.UpdateProgressBar(ProgressValue);
     }
 
-    public void CalculateBackwardToFinish()
-    {
-        ProgressValue-=1/(float)finishLineZ;
-        UIManager.Instance.UpdateProgressBar(ProgressValue);
-    }
+    
+    
+    
 
     public void ResetTheLevel()
     {
